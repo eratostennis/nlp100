@@ -25,3 +25,39 @@ object p2 {
     println(ans)
   }
 }
+
+object p3 {
+  val str = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+  def main(args: Array[String]) {
+    // use split to tokenize
+    str.replaceAll("[,.]","").split(" ").map { w => w.length }.foreach(println)
+  }
+}
+
+object p4 {
+  val str = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+  val oneWordGroup = Seq(1,5,6,7,8,15,16,19)
+  def main(args: Array[String]) {
+    val words = str.replaceAll("[,.]","").split(" ").zipWithIndex.map {
+      case (word, index) if (oneWordGroup.contains(index)) => word.substring(0,1) -> index
+      case (word, index) if (!oneWordGroup.contains(index)) => word.substring(0,2) -> index
+    }.toMap
+    println(words)
+  }
+}
+
+object p5 {
+  val str1 = "I am an NLPer"
+  val n1 = 2
+  def main(args: Array[String]) {
+    println(wordNgram(str1, n1))
+    println(charNgram(str1, n1))
+  }
+  def ngram[T](n: Int)(xs: Iterable[T]) = xs.sliding(n)
+  def wordNgram(str: String, n: Int): List[Iterable[String]] = {
+    return ngram(n)(str.split(" ")).toList
+  }
+  def charNgram(str: String, n: Int): List[Iterable[Char]] = {
+    return ngram(n)(str).toList
+  }
+}
