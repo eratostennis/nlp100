@@ -61,3 +61,17 @@ object p5 {
     return ngram(n)(str).toList
   }
 }
+
+object p6 {
+  val str1 = "paraparaparadise"
+  val str2 = "paragraph"
+  def main(args: Array[String]) {
+    val X = p5.charNgram(str1, 2).toSet
+    val Y = p5.charNgram(str2, 2).toSet
+    println(X.union(Y))
+    println(X.intersect(Y))
+    println(X.diff(Y))
+    println(s"X contains se? ${X.contains("se")}")
+    println(s"Y contains se? ${Y.contains("se")}")
+  }
+}
