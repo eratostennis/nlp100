@@ -75,3 +75,33 @@ object p6 {
     println(s"Y contains se? ${Y.contains("se")}")
   }
 }
+
+object p7 {
+  val usage = "--x String --y String --z String"
+  def main(args: Array[String]) {
+    // Option settings 
+    if (args.length == 0) println(usage)
+    val arglist = args.toList
+    type OptionMap = Map[Symbol, Any]
+
+    def nextOption(map : OptionMap, list: List[String]) : OptionMap = { 
+      def isSwitch(s : String) = (s(0) == '-')
+      list match {
+        case Nil => map 
+        case "--x" :: value :: tail =>
+                               nextOption(map ++ Map('x -> value.toString), tail)
+        case "--y" :: value :: tail =>
+                               nextOption(map ++ Map('y -> value.toString), tail)
+        case "--z" :: value :: tail =>
+                               nextOption(map ++ Map('z -> value.toString), tail)
+        case string :: opt2 :: tail if isSwitch(opt2) =>  
+                               nextOption(map ++ Map('infile -> string), list.tail)
+        case string :: Nil =>  nextOption(map ++ Map('infile -> string), list.tail)
+        case option :: tail => println("Unknown option "+option) 
+                               exit(1) 
+      }   
+    }   
+    val options = nextOption(Map(),arglist)
+    println(s"${options.get('x).get.toString}時の${options.get('y).get.toString}は${options.get('z).get.toString}")
+  }
+}
