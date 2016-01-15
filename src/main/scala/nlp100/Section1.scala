@@ -105,3 +105,18 @@ object p7 {
     println(s"${options.get('x).get.toString}時の${options.get('y).get.toString}は${options.get('z).get.toString}")
   }
 }
+
+object p8 {
+  val str1 = "hoge fuga piyo."
+  val str2 = "テストです"
+  def main(args: Array[String]): Unit = {
+    println(cipher(str1))
+    println(cipher(cipher(str1)))
+    println("テストです")
+  }
+
+  def cipher(str: String) = str.map {
+    case w if w.isLower => (219 - w).toChar
+    case w => w
+  }
+}
