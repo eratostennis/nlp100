@@ -1,3 +1,5 @@
+import scala.util.Random
+
 object p0 {
   val str = "stressed"
   def main(args: Array[String]) {
@@ -118,5 +120,19 @@ object p8 {
   def cipher(str: String) = str.map {
     case w if w.isLower => (219 - w).toChar
     case w => w
+  }
+}
+
+object p9 {
+  val str1 = "I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."
+  def main(args: Array[String]) {
+    val ans = str1.split("\\s+").map {
+      case w if (w.length > 4) => w.head + randomize(w.substring(1, w.length -1)) + w.last
+      case w => w
+    }.mkString(" ")
+    println(ans)
+  }
+  def randomize(str: String): String = {
+    Random.shuffle(str.toIterator).mkString
   }
 }
