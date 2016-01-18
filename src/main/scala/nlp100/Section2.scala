@@ -27,3 +27,11 @@ object p12 {
     col2.close()
   }
 }
+
+object p13 {
+  def main(args: Array[String]) {
+    Source.fromInputStream(getClass.getResourceAsStream("/col1.txt")).getLines().zip(Source.fromInputStream(getClass.getResourceAsStream("/col2.txt")).getLines()).foreach {
+     x => println(x._1 + "\t" + x._2)
+   }
+  }
+}
