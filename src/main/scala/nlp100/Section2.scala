@@ -41,3 +41,9 @@ object p14 {
     Source.fromFile(getClass.getResource("/").getPath + "hightemp.txt").getLines().take(args(0).toInt).foreach(println)
   }
 }
+
+object p15 {
+  def main(args: Array[String]) {
+    Source.fromFile(getClass.getResource("/").getPath + "hightemp.txt").getLines().toStream.takeRight(args(0).toInt).foreach(println)
+  }
+}
