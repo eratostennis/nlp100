@@ -47,3 +47,16 @@ object p15 {
     Source.fromFile(getClass.getResource("/").getPath + "hightemp.txt").getLines().toStream.takeRight(args(0).toInt).foreach(println)
   }
 }
+
+object p16 {
+  def main(args: Array[String]) {
+    val n = args(0).toInt
+    val splits = (1 to n).map(i => new PrintWriter(s"split.txt.$i"))
+    val (lines, lines2) = Source.fromFile(getClass.getResource("/").getPath + "hightemp.txt").getLines().duplicate 
+
+    // size method need to iterate
+    val size = lines2.size/n
+    (0 until n).foreach(i => lines.take(size).foreach(splits(i).println))
+    splits.foreach(_.close)
+  }
+}
