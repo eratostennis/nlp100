@@ -60,3 +60,11 @@ object p16 {
     splits.foreach(_.close)
   }
 }
+
+object p17 {
+  def main(args: Array[String]) {
+    Source.fromFile(getClass.getResource("/").getPath + "hightemp.txt").getLines().toStream.take(1).foreach {line =>
+      line.split("\\s+").toSet.foreach(println)
+    }
+  }
+}
